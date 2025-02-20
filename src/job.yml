@@ -1,15 +1,16 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 code: model
 command: >-
-  python 
-  --
-  --
+  python train.py
+  -- diabetes-dev-folder ${{inputs.training_data}}
 inputs:
   training_data: 
     type: uri_folder 
-    path: 
-  reg_rate: 0.01
+    path: azureml:diabetes-dev-folder@latest
+  reg_rate: 
+    type: number
+    default: 0.01
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
 compute: 
-experiment_name: 
-description: 
+experiment_name: diabetes-classification
+description: Training a diabetes classification model using Scikit-learn.
